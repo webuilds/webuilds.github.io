@@ -303,6 +303,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   padding-left: 0;
   color: #fff;
+  text-shadow: 0px 0px 2px rgba(255,255,255,0.3);
+
 }
 #fh5co-header.navbar-fixed-top {
   position: fixed !important;
@@ -1220,8 +1222,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: -40px;
   background: #fff;
   z-index: 8;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   font-size: 30px;
   padding-top: 5px;
   text-align: center;
@@ -1233,6 +1235,7 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-transition: 0.2s;
   -o-transition: 0.2s;
   transition: 0.2s;
+  border: solid 3px #A4D792;
 }
 #footer .gotop:hover, #footer .gotop:focus {
   top: -25px;
@@ -1409,3 +1412,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*# sourceMappingURL=style4.css.map */
+
+
+
+.gradient-all {
+  background: linear-gradient(135deg, #12BCB0 20%, #FABE0E 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding: 0.2em 0.2em ;
+  border: 1px solid transparent;
+  border-image: linear-gradient(135deg, #12BCB0 20%, #FABE0E 70%);
+  border-image-slice: 1;
+}
