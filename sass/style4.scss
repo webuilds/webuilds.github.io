@@ -1,1482 +1,835 @@
-$font-primary: 'Source Sans Pro', Arial, sans-serif;
-
-// Overrides
-$grid-gutter-width: 40px !default; 
-$border-radius-base:  4px !default;
-$padding-base-vertical: 14px !default;
-
-$brand-primary: #A4D792 !default; 
-$brand-secondary: #21825C !default; 
-
-
-
-$brand-white: #fff;
-$brand-black: #000;
-$brand-darker: #444;
-$brand-gray: #ccc;
-$brand-lighter: #e9e9e9;
-$brand-body-color: #818892;
-$brand-selection-color: #f9f6f0;
-$brand-overlay-color: #3b3d40;
-$brand-bg-color: $brand-white;
-
-$input-border-focus:  $brand-primary !default;
-$form-group-margin-bottom:       30px !default;
-
-
-
-// Mixin
-@mixin transition($transition) {
-    -moz-transition:    $transition ease;
-    -o-transition:      $transition ease;
-    -webkit-transition: $transition ease;
-    -ms-transition: 		$transition ease;
-    transition:         $transition ease;
-}
-@mixin inline-block() {
-	display:-moz-inline-stack;
-	display:inline-block;
-	zoom:1;
-	*display:inline;
-}
-@mixin flex() {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flexbox;
-	display: flex;
-}
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
-}
-@mixin flex() {
-	display: -webkit-box;      
-  	display: -moz-box;         
-  	display: -ms-flexbox;      
-  	display: -webkit-flex;     
-  	display: flex;             
-}
-@mixin flexwrap() {
-	flex-wrap: wrap;
-	-webkit-flex-wrap: wrap; 
-	-moz-flex-wrap: wrap; 
-}
-@mixin angle($pseudo, $flip: false, $angle: 1.5deg) {
-  // Possible values for $pseudo are: before, after, both
-  @if $pseudo == 'before' or $pseudo == 'after' or $pseudo == 'both' {
-    position: relative;
-    z-index: 1;
-    $selector: if($pseudo == 'both', '&:before,&:after', '&:#{$pseudo}');
-
-    #{$selector} {
-      background: inherit;
-      content: '';
-      display: block;
-      height: 50%;
-      left: 0;
-      position: absolute;
-      right: 0;
-      z-index: -1;
-      -webkit-backface-visibility: hidden; // for Chrome Windows
-    }
-
-    @if $pseudo == 'before' {
-      #{$selector} {
-        top: 0;
-
-        @if $flip {
-          transform: skewY($angle * -1);
-          transform-origin: 0 0;
-        } @else {
-          transform: skewY($angle);
-          transform-origin: 100% 0;
-        }
-      }
-    }
-
-    @if $pseudo == 'after' {
-      #{$selector} {
-        bottom: 0;
-
-        @if $flip {
-          transform: skewY($angle);
-          transform-origin: 0 100%;
-        } @else {
-          transform: skewY($angle * -1);
-          transform-origin: 100%;
-        }
-      }
-    }
-
-    @if $pseudo == 'both' {
-      &:before {
-        top: 0;
-
-        @if $flip {
-          transform: skewY($angle * -1);
-          transform-origin: 0 0;
-        } @else {
-          transform: skewY($angle);
-          transform-origin: 100% 0;
-        }
-      }
-
-      &:after {
-        bottom: 0;
-
-        @if $flip {
-          transform: skewY($angle);
-          transform-origin: 0 0;
-        } @else {
-          transform: skewY($angle * -1);
-          transform-origin: 100%;
-        }
-      }
-    }
-  }
-}
-
-
-
-@mixin fh5co-gradient() {
-
-	background-color: $brand-primary;
-	/* IE9, iOS 3.2+ */
-	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiMyMTgyNWMiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iI2E0ZDc5MiIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
-	background-image: -webkit-gradient(linear, 0% 0%, 100% 100%,color-stop(0, rgb(33, 130, 92)),color-stop(1, rgb(164, 215, 146)));
-	/* Android 2.3 */
-	background-image: -webkit-linear-gradient(top left,rgb(33, 130, 92) 0%,rgb(164, 215, 146) 100%);
-	/* IE10+ */
-	background-image: linear-gradient(to bottom right,rgb(33, 130, 92) 0%,rgb(164, 215, 146) 100%);
-	background-image: -ms-linear-gradient(top left,rgb(33, 130, 92) 0%,rgb(164, 215, 146) 100%);
-
-}
-
-@font-face {
-	font-family: 'icomoon';
-	src:url('../fonts/icomoon/icomoon.eot?srf3rx');
-	src:url('../fonts/icomoon/icomoon.eot?srf3rx#iefix') format('embedded-opentype'),
-		url('../fonts/icomoon/icomoon.ttf?srf3rx') format('truetype'),
-		url('../fonts/icomoon/icomoon.woff?srf3rx') format('woff'),
-		url('../fonts/icomoon/icomoon.svg?srf3rx#icomoon') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@mixin icomoon() {
-	
-	font-family: 'icomoon';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	
-}
-
-// Import 
-@import 'bootstrap/mixins';
-@import 'bootstrap/variables';
-
-
-
-
-/* =======================================================
-*
-* 	Template Style 
-*	Edit this section
-*
-* ======================================================= */
-
-// Template Base
-body {
-	font-family: $font-primary;
-	font-weight: 300;
-	font-size: 20px;
-	line-height: 1.5;
-	color: lighten($brand-darker, 20%);
-	color: #7f7f7f;
-	background: $brand-bg-color;
-	height: 100%;
-	position: relative;
-	
-}
-a {
-	color: $brand-primary;
-	@include transition(.5s);
-	&:hover, &:active, &:focus {
-		color: $brand-primary;
-		outline: none;
-	}
-}
-p {
-	margin-bottom: 1.5em;
-}
-
-h1, h2, h3, h4, h5, h6 {
-	color: $brand-black;
-	font-family: $font-primary;
-	font-weight: 400;
-	margin: 0 0 30px 0;
-}
-::-webkit-selection {
-  color: $brand-body-color;
-  background: $brand-selection-color;
-}
-
-::-moz-selection {
-  color: $brand-body-color;
-  background: $brand-selection-color;
-}
-
-::selection {
-  color: $brand-body-color;
-  background: $brand-selection-color;
-}
-
-// Edges
-.edge--bottom {
-  @include angle(after);
-}
-
-.edge--bottom--reverse {
-  @include angle(after, true);
-}
-
-.edge--top {
-  @include angle(before);
-}
-
-.edge--top--reverse {
-  @include angle(before, true);
-}
-
-.edge--both {
-  @include angle(both);
-}
-
-.edge--both--reverse {
-  @include angle(both, true);
-}
-
-
-
-#fh5co-header {
-	// position: relative;
-	position: absolute;
-	z-index: 99;
-	width: 100%;
-	opacity: 1;
-	top: 0;
-	margin-top: 40px;
-
-
-	@media screen and (max-width: $screen-sm) {
-		margin-top: 0;
-		background: $brand-white;
-		-webkit-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
-		-moz-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
-		-ms-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
-		box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
-		.navbar-brand {
-			color: $brand-primary!important;
-		}
-		#navbar {
-			li {
-				a {
-					color: rgba(0,0,0,.5)!important;
-					@include transition(.3s);
-					&:hover {
-						color: $brand-primary!important;
-					}
-					span {
-						&:before {
-							background: transparent!important;
-						}
-					}
-				}
-				&.active {
-					a {
-						background: transparent;
-						background: none;
-						color: $brand-primary!important;
-						span {
-							&:before {
-								visibility: visible;
-								-webkit-transform: scaleX(1);
-								transform: scaleX(1);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	// padding-top: 15px;
-	.navbar {
-		padding-bottom: 0;
-		margin-bottom: 0;
-	}
-	#navbar {
-		li {
-			a {
-				font-family: $font-primary;
-				color: rgba(255,255,255,.5);
-				position: relative;
-				// text-transform: uppercase;
-				font-size: 19px;
-				font-weight: 300;
-				// @include transition(.5s);
-				span {
-					position: relative;
-					display: block;
-					padding-bottom: 2px;
-					&:before {
-						content: "";
-						position: absolute;
-						width: 100%;
-						height: 2px;
-						bottom: 0;
-						left: 0;
-						background-color: rgba(255,255,255,.5);
-						visibility: hidden;
-						-webkit-transform: scaleX(0);
-						-moz-transform: scaleX(0);
-						-ms-transform: scaleX(0);
-						-o-transform: scaleX(0);
-						transform: scaleX(0);
-						-webkit-transition: all 0.3s ease-in-out 0s;
-						-moz-transition: all 0.3s ease-in-out 0s;
-						-ms-transition: all 0.3s ease-in-out 0s;
-						-o-transition: all 0.3s ease-in-out 0s;
-						transition: all 0.3s ease-in-out 0s;
-					}
-				}
-				&:hover {
-					// color: $brand-primary;
-					color: $brand-white;
-					// color: rgba(255,255,255,1);
-					span {
-						&:before {
-							visibility: visible;
-							-webkit-transform: scaleX(1);
-							-moz-transform: scaleX(1);
-							-ms-transform: scaleX(1);
-							-o-transform: scaleX(1);
-							transform: scaleX(1);
-						}
-					}
-				}
-
-			}
-			&.active {
-				a {
-					background: transparent;
-					background: none;
-					color: $brand-white;
-					span {
-						&:before {
-							visibility: visible;
-							-webkit-transform: scaleX(1);
-							transform: scaleX(1);
-						}
-					}
-				}
-			}
-		}
-	}
-	.navbar-brand {
-		float: left;
-		display: block;
-		font-size: 30px;
-		font-weight: 700;
-		padding-left: 0;
-		color: $brand-white;
-		
-	}
-	&.navbar-fixed-top {
-		position: fixed!important;
-		background: $brand-white;
-		-webkit-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
-		-moz-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
-		-ms-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
-		box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
-		margin-top: 0px;
-		top: 0;
-		.navbar-brand {
-			color: $brand-primary;
-		}
-		#navbar {
-			li {
-				a {
-					color: rgba(0,0,0,.5);
-					@include transition(.3s);
-					&:hover {
-						color: $brand-primary;
-					}
-				}
-				&.active {
-					a {
-						background: transparent;
-						background: none;
-						color: $brand-primary;
-						span {
-							&:before {
-								visibility: visible;
-								-webkit-transform: scaleX(1);
-								transform: scaleX(1);
-								background-color: $brand-primary;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	.navbar-default {
-		border: transparent;
-		background: transparent;
-		@include border-radius(0px);
-		@media screen and (max-width: $screen-sm) {
-			margin-top: 0px;
-			padding-right: 0px;
-			padding-left: 0px;
-		}
-		.brand-slogan {
-			margin: 28px 0 0 15px;
-			float: left;
-			letter-spacing: 2px;
-			color: #adadad;
-			em {
-				color: $brand-primary;
-				font-style: normal;
-			}
-		}
-	}
-	a {
-		@include transition(.0s);
-	}
-
-}
-
-
-#fh5co-home {
-	background-color: transparent;
-	background-size: cover;
-	background-attachment: fixed;
-	position: relative;
-	width: 100%;
-	
-	background-color: $brand-primary;
-	color: #fff;
-	overflow: hidden;
-	.gradient {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		z-index: 2;
-		opacity: .9;
-		-webkit-backface-visibility: hidden; // for Chrome Windows
-		
-		@include fh5co-gradient;
-	}
-	&, .text-wrap {
-		height: 900px;
-	}
-	.text-wrap {
-		display: table;
-		width: 100%;
-		position: relative;
-		z-index: 4;
-	}
-	.text-inner {
-		display: table-cell;
-		vertical-align: middle;
-		text-align: center;
-		a {
-			color: rgba(255,255,255,1);
-			border-bottom: 1px dashed rgba(255,255,255,.5);
-			@include transition(.5s);
-			&:hover, &:active, &:focus {
-				text-decoration: none;
-				color: rgba(255,255,255,1);
-				border-bottom: 1px dashed rgba(255,255,255,1);
-			}
-		}
-		h1 {
-			font-size: 50px;
-			color: rgba(255,255,255,1);
-			margin: 0 0 20px 0;
-		}
-		h2 {
-			font-size: 28px;
-			line-height: 38px;
-			font-weight: 300;
-			color: rgba(255,255,255,.8);
-			margin: 0;
-		}
-	}
-}
-
-
-
-// Slant
-.slant {
-	position: absolute;
-	transform: rotate(-1.7deg);
-	-ms-transform: rotate(-1.7deg);
-	-webkit-transform: rotate(-1.7deg);
-	-o-transform: rotate(-1.7deg);
-	-moz-transform: rotate(-1.7deg);
-	background-color: #fff;
-	content: "";
-	z-index: 3;
-	display: inline-block;
-	height: 70px;
-	bottom: 0;
-	margin-bottom: -35px;
-	padding: 0;
-	width: 101%;
-}
-
-#fh5co-intro {
-	position: relative;
-	bottom: 0;
-	margin-top: -150px;
-	z-index: 10;
-	padding-bottom: 7em;
-	@media screen and (max-width: $screen-sm) {
-		padding-bottom: 3em;
-	}
-	> div {
-		@include flex;
-		@include flexwrap;
-	}
-	.fh5co-block {
-		width: 33.33%;
-		float: left;
-		text-align: center;
-		font-size: 16px;
-		min-height: 300px;
-		vertical-align: middle;
-		padding: 40px;
-		background: $brand-white;
-		-webkit-box-shadow: 7px 14px 42px 3px rgba(163, 174, 184, 0.4);
-		-moz-box-shadow: 7px 14px 42px 3px rgba(163, 174, 184, 0.4);
-		-ms-box-shadow: 7px 14px 42px 3px rgba(163, 174, 184, 0.4);
-		-o-box-shadow: 7px 14px 42px 3px rgba(163, 174, 184, 0.4);
-		box-shadow: 7px 14px 42px 3px rgba(163, 174, 184, 0.4);
-		z-index: 7;
-		flex-grow: 1;
-
-		background-size: cover;
-		position: relative;
-		backgroun-repeat: no-repeat;
-	
-		@media screen and (max-width: $screen-sm) {
-			width: 100%;	
-		}
-		> .overlay-darker {
-			z-index: 8;
-			opacity: .5;
-			background: #474747;	
-			
-			
-
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-		}
-		> .overlay {
-			background: $brand-white;
-			opacity: 1;
-			z-index: 9;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			@include transition(.5s);
-		}
-		> .fh5co-text {
-			position: relative;
-			z-index: 10;
-			.fh5co-intro-icon {
-				font-size: 50px;
-				color: $brand-primary;
-				margin-bottom: 30px;
-				display: block;
-			}
-		}
-		h2 {
-			font-size: 24px;
-			font-weight: 400;
-		}
-		
-		&:hover, &:focus {
-			> .overlay {
-				opacity: 0;
-				z-index: 9;
-			}
-			> .fh5co-text {
-				color: $brand-white;
-				.fh5co-intro-icon {
-					color: $brand-white;
-				}
-				
-			}
-			h2 {
-				color: $brand-white;
-			}
-			.btn {
-				border: 2px solid $brand-white!important;
-				background: transparent;
-				&:hover {
-					background: $brand-primary!important;
-					border: 2px solid $brand-primary!important;
-				}
-			}
-		}
-		
-	}
-}
-
-
-
-.watch-video {
-	text-align: center;
-	width: 100%;
-	display: block;
-	float: left;
-	span {
-		display: block;
-		margin-bottom: 20px;
-		letter-spacing: 2px;
-		text-transform: uppercase;
-		font-weight: bold;
-	}
-	.btn-video {
-		display: block;
-		font-size: 60px;
-		height: 120px;
-		width: 120px;
-		margin: 0 auto;
-		border: 2px solid $brand-primary;
-		line-height: 0px;
-		display: table;
-		text-align: center;
-		@include border-radius(50%);
-		&:hover, &:focus, &:active {
-			text-decoration: none;
-		}
-		i {
-			position: relative;
-			display: table-cell;
-			vertical-align: middle;
-			margin: 0;
-			padding: 0;
-			right: -9px;
-			// top: -1px;
-			@include transition(.3s);
-		}
-		&:hover, &:focus {
-			i {
-				-webkit-transform: scale(1.1);
-				-moz-transform: scale(1.1);
-				-ms-transform: scale(1.1);
-				-o-transform: scale(1.1);
-				transform: scale(1.1);
-			}
-		}
-	}
-}
-
-
-#fh5co-services, #fh5co-testimonials, #fh5co-counters, #fh5co-work, #fh5co-contact, #fh5co-about {
-	padding: 4em 0;
-	@media screen and (max-width: $screen-sm) {
-		padding: 2em 0;
-	}
-}
-#fh5co-services, #fh5co-work, #fh5co-counters {
-	padding: 7em 0;
-	@media screen and (max-width: $screen-sm) {
-		padding: 4em 0;
-	}	
-}
-#fh5co-services {
-
-
-	@include fh5co-gradient;
-
-	overflow: hidden;
-	position: relative;
-	color: rgba(255,255,255,.7);
-	&:before, &:after {
-		position: absolute;
-		transform: rotate(-1.7deg);
-		-ms-transform: rotate(-1.7deg);
-		-webkit-transform: rotate(-1.7deg);
-		-o-transform: rotate(-1.7deg);
-		-moz-transform: rotate(-1.7deg);
-		background-color: #fff;
-		content: "";
-		z-index: 3;
-		display: inline-block;
-		height: 70px;
-		padding: 0;
-		width: 101%;
-	}
-	&:before {
-		top: 0;
-		margin-top: -35px;
-	}
-	&:after {
-		bottom: 0;
-		margin-bottom: -35px;
-	}
-	.fh5co-service {
-		padding-right: 30px;
-	}
-	h3 {
-		font-size: 24px;
-		color: $brand-white;
-	}
-	.icon {
-		font-size: 70px;
-		margin-bottom: 30px;
-		@include inline-block;
-		&:before {
-			color: $brand-white;
-		}
-	}
-	.section-heading {
-		h2 {
-			color: $brand-white;
-			&.left-border {
-				&:after {
-					background: rgba(255,255,255,.3);
-				}
-			}
-		}
-	}
-}
-
-#fh5co-counters {
-	background: $brand-primary;
-	overflow: hidden;
-	background-color: transparent;
-	background-size: cover;
-	background-attachment: fixed;
-	position: relative;
-	width: 100%;
-	padding: 9em 0 10em 0;
-	@media screen and (max-width: $screen-sm) {
-		padding: 4em 0;
-	}	
-	.fh5co-overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 2;
-		background: rgba(0,0,0,.7);
-	}
-	&:before, &:after {
-		position: absolute;
-		transform: rotate(-1.7deg);
-		-ms-transform: rotate(-1.7deg);
-		-webkit-transform: rotate(-1.7deg);
-		-o-transform: rotate(-1.7deg);
-		-moz-transform: rotate(-1.7deg);
-		background-color: #fff;
-		content: "";
-		z-index: 3;
-		display: inline-block;
-		height: 70px;
-		padding: 0;
-		width: 101%;
-	}
-	&:before {
-		top: 0;
-		margin-top: -35px;
-	}
-	&:after {
-		bottom: 0;
-		margin-bottom: -35px;
-	}
-	.section-heading {
-		position: relative;
-		z-index: 3;
-		margin-bottom: 0;
-		h2 {
-			color: $brand-white;
-			
-			&:after {
-				background: rgba(255,255,255,.3)!important;
-			}
-			
-		}
-		.subtext {
-			h3 {
-				color: rgba(255,255,255,.7)!important;
-			}
-		}
-	}
-	.fh5co-counter {
-		position: relative;
-		z-index: 3;
-		text-align: center;
-		@media screen and (max-width: $screen-md) {
-			margin-bottom: 50px;
-			float: left;
-			width: 100%;
-		}
-		.fh5co-counter-icon, 
-		.fh5co-counter-number, 
-		.fh5co-counter-label {
-			display: block;
-		}
-		.fh5co-counter-icon {
-			font-size: 40px;
-			color: $brand-primary;
-		}
-		.fh5co-counter-number {
-			font-size: 70px;
-			color: $brand-white;
-			font-weight: 300;
-		}
-		.fh5co-counter-label {
-			color: rgba(255,255,255,.5);
-			font-size: 18px;
-			font-weight: 400;
-		}
-	}
-}
-
-#fh5co-testimonials {
-	.box-testimony {
-		margin-bottom: 2em;
-		float: left;
-		a {
-			color: rgba(255,255,255,.5);
-			&:hover, &:focus, &:active {
-				color: rgba(255,255,255,1);
-				text-decoration: none;
-			}
-		}
-		blockquote {
-			padding-left: 0;
-			border-left: none;
-			padding: 30px;
-			background: $brand-white;
-			background: $brand-primary;
-			font-size: 20px;
-			font-weight: 300;
-			
-			position: relative;
-			@include border-radius(7px);
-			&:after {
-			   content: "";
-			   position: absolute;
-			   top: 100%;
-			   left: 40px;
-			   border-top: 10px solid black;
-			   border-top-color: $brand-white; 
-			   border-top-color: $brand-primary;
-			   border-left: 10px solid transparent;
-			   border-right: 10px solid transparent; 
-			}
-			
-			p {
-				font-style: italic;
-				color: $brand-white;
-			}
-		}
-		.author {
-			line-height: 20px;
-			color: rgba(0,0,0,1);
-			font-size: 16px;
-			margin-left: 20px;
-			font-weight: 400;
-			a {
-				color: $brand-primary;
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-			> figure {
-				float: left;
-				margin-right: 10px;
-				img {
-					width: 60px;
-					@include border-radius(50%);
-				}
-			}
-			p {
-				float: left;
-				margin-top: 10px;
-			}
-			.subtext {
-				display: block;
-				color: rgba(0,0,0,.5);
-				font-size: 16px;
-				font-weight: 400!important;
-			}
-		}
-	}
-}
-
-#fh5co-work {
-	// background: $brand-secondary;
-
-	overflow: hidden;
-	position: relative;
-	color: rgba(255,255,255,.8);
-	@include fh5co-gradient;
-	a {
-		color: rgba(255,255,255,.5);
-		text-decoration: underline;
-		&:hover {
-			color: rgba(255,255,255,1);
-		}
-	}
-	&:before, &:after {
-		position: absolute;
-		transform: rotate(-1.7deg);
-		-ms-transform: rotate(-1.7deg);
-		-webkit-transform: rotate(-1.7deg);
-		-o-transform: rotate(-1.7deg);
-		-moz-transform: rotate(-1.7deg);
-		background-color: #fff;
-		content: "";
-		z-index: 3;
-		display: inline-block;
-		height: 70px;
-		padding: 0;
-		width: 101%;
-	}
-	&:before {
-		top: 0;
-		margin-top: -35px;
-	}
-	&:after {
-		bottom: 0;
-		margin-bottom: -35px;
-	}
-	.section-heading {
-		h2 {
-			color: $brand-white;
-			
-				&:after {
-					background: rgba(255,255,255,.3);
-				}
-			
-		}
-		h3 {
-			color: rgba(255,255,255,.8);
-		}
-	}
-	.fh5co-project-item {
-		display: block;
-		width: 100%;
-		position: relative;
-		top: 0;
-		background: $brand-white;
-		overflow: hidden;
-		z-index: 9;
-		
-		margin-bottom: 30px;
-		@include border-radius(7px);
-		@include transition(.3s);
-		
-		img {
-			z-index: 8;
-			opacity: 1;
-			@include transition(.3s);
-		}
-		.fh5co-text {
-			padding: 10px 20px;
-			h2, span {
-				text-decoration: none!important;
-			}
-			h2 {
-				font-size: 18px;
-				font-weight: bold;
-				margin: 0;
-			}
-			span {
-				color: lighten($brand-black, 70%);
-				font-size: 16px;
-				font-weight: 400;
-			}
-		}
-		&:hover, &:focus {
-			-webkit-box-shadow: 7px 14px 42px 3px rgba(0, 0, 0, 0.4);
-			-moz-box-shadow: 7px 14px 42px 3px rgba(0, 0, 0, 0.4);
-			-ms-box-shadow: 7px 14px 42px 3px rgba(0, 0, 0, 0.4);
-			-o-box-shadow: 7px 14px 42px 3px rgba(0, 0, 0, 0.4);
-			box-shadow: 7px 14px 42px 3px rgba(0, 0, 0, 0.4);
-			text-decoration: none;
-			top: -15px;
-			img {
-				opacity: .7;
-			}
-			h2, span {
-				text-decoration: none!important;
-			}
-		}
-	}
-}
-
-.fh5co-person {
-	border: 2px solid lighten($brand-black, 95%);
-	padding: 80px 30px 30px 30px;
-	float: left;
-	width: 100%;
-	position: relative;
-	@media screen and (max-width: $screen-md) {
-		margin-bottom: 3.5em;
-	}
-	figure {
-		position: absolute;
-		margin-top: -60px;
-		top: 0;
-		left: 50%;
-		margin-left: -60px;
-		display: block;
-		margin-bottom: 50px;
-		img {
-			width: 120px;
-			border: 2px solid lighten($brand-black, 95%);
-			@include border-radius(50%);
-		}
-	}
-	h3 {
-		margin-bottom: 0px;
-	}
-	.fh5co-position {
-		color: lighten($brand-black, 70%);
-		display: block;
-		margin-bottom: 20px;
-	}
-}
-
-// Forms
-.form-control {
-	box-shadow: none;
-	background: transparent;
-	border: 2px solid rgba(0,0,0,.1);
-	height: 54px;
-	font-size: 18px;
-	font-weight: 400;
-	// &:hover
-	&:active, &:focus {
-		outline: none;
-		box-shadow: none;
-		border-color: $brand-primary;
-	}
-}
-.btn {
-	@include transition(.5s);
-	&:hover, &:active, &:focus {
-		outline: none;
-	}
-}
-#fh5co-contact {
-	// Contacts
-	padding-bottom: 0;
-	.fh5co-contact-info {
-		// color: rgba(255,255,255,.7);
-		padding: 0;
-		margin: 0 0 1.5em 0;
-		li {
-			position: relative;
-			padding: 0;
-			margin: 0 0 1.5em 0;
-			padding-left: 50px;
-			list-style: none;
-
-			i {
-				position: absolute;
-				top: .2em;
-				left: 0;
-			}
-		}
-	}
-}
-
-
-.section-heading {
-	float: left;
-	width: 100%;
-	padding-bottom: 50px;
-	margin-bottom: 50px;
-	clear: both;
-	h2 {
-		margin: 0 0 30px 0;
-		font-size: 50px;
-		font-weight: 300;
-		color: #444;
-		text-transform: uppercase;
-		position: relative;
-		display: block;
-		padding-bottom: 20px;
-		line-height: 1.5;
-		&.left-border {
-			&:after {
-				content: "";
-				position: absolute;
-				display: block;
-				width: 80px;
-				height: 2px;
-				background: $brand-primary;
-				left: 0%;
-				margin-left: 0px;
-				bottom: 0;
-			}
-		}
-		&:after {
-			content: "";
-			position: absolute;
-			display: block;
-			width: 80px;
-			height: 2px;
-			background: $brand-primary;
-			left: 50%;
-			margin-left: -40px;
-			bottom: 0;
-		}
-		@media screen and (max-width: $screen-sm) {
-			font-size: 30px;
-		}
-	}
-	h3 {
-		font-weight: 300;
-		line-height: 1.5;
-		color: #929292;
-		@media screen and (max-width: $screen-sm) {
-			font-size: 24px!important;
-			line-height: 34px;
-		}
-	}
-}
-
-.btn {
-	@include transition(.3s);
-}
-
-
-
-// Burger Menu
-.fh5co-nav-toggle {
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-  text-decoration: none;
-  &.active i {
-		&::before, &::after {
-			background: $brand-primary;
-		}
-  }
-  &:hover, &:focus, &:active {
-  	outline: none;
-  	border-bottom: none!important;
-  }
-  i {
-  	position: relative;
-	  @include inline-block;
-	  width: 25px;
-	  height: 3px;
-	  color: $brand-primary;
-	  font:bold 14px/.4 Helvetica;
-	  text-transform: uppercase;
-	  text-indent:-55px;
-	  background: $brand-primary;
-	  transition: all .2s ease-out;
-		 &::before, &::after {
-	  	  content:'';
-		  width: 25px;
-		  height: 3px;
-		  background: $brand-primary;
-		  position: absolute;
-		  left:0;
-		  @include transition(.2s);
-	  }
-  }
-}
-
-.fh5co-nav-toggle i::before {
-  top: -7px;
-}
-.fh5co-nav-toggle i::after {
-  bottom: -7px;
-}
-.fh5co-nav-toggle:hover i::before {
-  top: -10px;
-}
-.fh5co-nav-toggle:hover i::after {
-  bottom: -10px;
-}
-.fh5co-nav-toggle.active i {
-	background: transparent;
-}
-.fh5co-nav-toggle.active i::before {
-  top:0;
-  -webkit-transform: rotateZ(45deg);
-     -moz-transform: rotateZ(45deg);
-      -ms-transform: rotateZ(45deg);
-       -o-transform: rotateZ(45deg);
-          transform: rotateZ(45deg);
-}
-.fh5co-nav-toggle.active i::after {
-  bottom:0;
-  -webkit-transform: rotateZ(-45deg);
-     -moz-transform: rotateZ(-45deg);
-      -ms-transform: rotateZ(-45deg);
-       -o-transform: rotateZ(-45deg);
-          transform: rotateZ(-45deg);
-}
-.fh5co-nav-toggle {
-  position: absolute;
-  top: 2px;
-  right: 0px;
-  z-index: 21;
-  padding: 6px 0 0 0;
-  display: block;
-  margin: 0 auto;
-  display: none;
-  height: 44px;
-  width: 25px;
-  border-bottom: none!important;
-  @media screen and (max-width: $screen-sm) {
-  	display: block;
-  }
-}
-
-
-#footer {
-	padding: 50px 0;
-	color: #7f7f7f;
-	position: relative;
-	// color: #d6d6d6;btn
-	.gotop {
-		position: absolute; 
-		top: -20px;
-		left: 50%;
-		margin-left: -40px;
-		background: $brand-white;
-		z-index: 8;
-		width: 80px;
-		height: 80px;
-		font-size: 30px;
-		padding-top: 5px;
-		text-align: center;
-		vertical-align: middle;
-		@include border-radius(50%);
-		@include transition(.2s);
-		&:hover, &:focus {
-			top: -25px;
-			text-decoration: none!important;
-		}
-	}
-	.copyright {
-		font-size: 16px;
-		margin-bottom: 0px;
-		padding-bottom: 0;
-	}
-}
-
-
-.btn {
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	@include transition(.3s);
-	&.btn-primary {
-		background: $brand-primary;
-		color: $brand-white;
-		border: none!important;
-		border: 2px solid transparent!important;
-		&:hover, &:active, &:focus {
-			box-shadow: none;
-			background: $brand-primary;
-		}
-	}
-	&:hover, &:active, &:focus {
-		background: #393e46!important;
-		color: $brand-white;
-		outline: none!important;
-	}
-	&.btn-default {
-		&:hover, &:focus, &:active {
-			border-color: transparent;
-		}
-	}
-}
-
-// Social
-.social {
-	padding: 0;
-	margin: 0;
-	display: inline-block;
-	position: relative;
-	width: 100%;
-	li {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: inline-block;
-		a {
-			font-size: 16px;
-			display: table;
-			width: 40px;
-			height: 40px;
-			margin: 0 4px;
-
-			i {
-				display: table-cell;
-				vertical-align: middle;
-			}
-			&:hover, &:active, &:focus {
-				text-decoration: none;
-				border-bottom: none;
-			}
-			&.social-box {
-				background: $brand-primary;
-				color: $brand-white;
-			}
-			&.social-circle {
-				background: $brand-primary;
-				color: $brand-white;
-				@include border-radius(50%);
-			}
-			&:hover {
-				background: #393e46!important;
-			}
-
-		}
-	}
-	&.social-box {
-		a {
-			background: $brand-primary;
-			color: $brand-white;
-		}
-	}
-	&.social-circle {
-		a {
-			background: $brand-primary;
-			color: $brand-white;
-			@include border-radius(50%);
-		}
-	}
-}
-
-// Map
-#map {
-	width: 100%;
-	height: 500px;
-	position: relative;
-	@media screen and (max-width: $screen-sm) {
-		height: 200px;
-	}
-}
-
-// Magnific Popup
-// Zoom
-.mfp-with-zoom .mfp-container,
-.mfp-with-zoom.mfp-bg {
-  opacity: 0;
-  -webkit-backface-visibility: hidden;
-  /* ideally, transition speed should match zoom duration */
-  -webkit-transition: all 0.3s ease-out;
-  -moz-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
-
-.mfp-with-zoom.mfp-ready .mfp-container {
-    opacity: 1;
-}
-.mfp-with-zoom.mfp-ready.mfp-bg {
-    opacity: 0.8;
-}
-
-.mfp-with-zoom.mfp-removing .mfp-container,
-.mfp-with-zoom.mfp-removing.mfp-bg {
-  opacity: 0;
-}
-
-
-
-.js .to-animate,
-.js .to-animate-2,
-.js .single-animate {
-	opacity: 0;
-}
-
-
-// Helper Class
-.col-xxs-12 {
-	@media screen and (max-width: 480px) {
-		float: none;
-		width: 100%;
-	}
-}
-.row-bottom-padded-lg {
-	padding-bottom: 7em;
-	@media screen and (max-width: $screen-sm ) {
-		padding-bottom: 2em;
-	}
-}
-.row-bottom-padded-md {
-	padding-bottom: 4em;
-	@media screen and (max-width: $screen-sm ) {
-		padding-bottom: 2em;
-	}	
-}
-.row-bottom-padded-sm {
-	padding-bottom: 2em;
-	@media screen and (max-width: $screen-sm ) {
-		padding-bottom: 2em;
-	}	
-}
-
-// Menu bar Animate
-.fh5co-animated {
-  -webkit-animation-duration: .3s;
-  animation-duration: .3s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-
-// #colour-variations li a {
-// 	width: 100%;
-// 	position: relative;
-// 	display: block;
-// 	overflow: hidden;
-// 	@include border-radius(4px);
-// 	@include transition(.4s);
-// 	&:hover {
-// 		opacity: .9;
-// 	}
-// 	> span {
-// 		width: 33.33%;
-// 		height: 20px;
-// 		float: left;
-// 		@include inline-block;
-// 	}
-// }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Integrated Trade Finance - Grow Your Global Business</title>
+	<meta charset="utf-8">
+	<meta content="INTEGRATED TRADE FINANCE LLC (ITF) is a global finance and market development company, founded in 2008 by Jeffrey B. Kamins. The company is headquartered in Omaha, Nebraska, USA, and maintains regional representation worldwide in Kiev, Ukraine; Johannesburg, South Africa; Lagos, Nigeria; Vienna, Austria; Riyadh, Saudi Arabia; Luxembourg City, Luxembourg; and Shanghai, China. ITF creates, develops and manages retail finance programs for manufacturers and dealers worldwide, under its Global Finance Program (GFP). ITF also arranges turn-key debt and equity finance for projects, and organizes and manages tenders for investors and buyers of capital equipment and other goods and services. ITF reinforces its mission 'to transcend borders to bring people, ideas, equipment and money together' worldwide." name="description">
+	<meta content="Finance, International finance, Trade finance, Project finance, Retail finance, Dealer stock finance, Equipment finance, Export finance, Find dealers, Equipment leasing, Distribution finance, Business plan development, Find investors, Investment funds, Ukraine finance, Africa finance, Latin America finance, China finance, India finance, Asia finance, Australia finance, Europe finance, Eastern Europe finance, CIS finance, Credit insurance, Multilateral development bank" name="keywords">
+	<meta content="website" property="og:type">
+	<meta content="Integrated Trade Finance" property="og:title">
+	<meta content="INTEGRATED TRADE FINANCE LLC (ITF) is a global finance and market development company, founded in 2008 by Jeffrey B. Kamins. The company is headquartered in Omaha, Nebraska, USA, and maintains regional representation worldwide in Kiev, Ukraine; Johannesburg, South Africa; Lagos, Nigeria; Vienna, Austria; Riyadh, Saudi Arabia; Luxembourg City, Luxembourg; and Shanghai, China. ITF creates, develops and manages retail finance programs for manufacturers and dealers worldwide, under its Global Finance Program (GFP). ITF also arranges turn-key debt and equity finance for projects, and organizes and manages tenders for investors and buyers of capital equipment and other goods and services. ITF reinforces its mission 'to transcend borders to bring people, ideas, equipment and money together' worldwide." property="og:description">
+	<meta content="http://itf-finance.com/" property="og:url">
+	<meta content="Integrated Trade Finance - Grow Your Global Business" property="og:site_name">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<link href="img/favicon.ico" rel="shortcut icon">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/normalize.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="css/jquery.jgrowl.css" rel="stylesheet">
+	<link href="css/jquery.arcticmodal.css" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-default" id="header-nav">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<div class="navbar-brand">
+						<a href="index.html"><img alt="Integrated Trade Finance logo" src="img/ITFlogoweb.png"></a>
+					</div><button aria-expanded="false" class="navbar-toggle collapsed" data-target="#collapsable-nav" data-toggle="collapse" id="navbarToggle" type="button"><span class="sr-only Toggle navigation"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+				</div>
+				<div class="collapse navbar-collapse" id="collapsable-nav">
+					<ul class="nav navbar-nav navbar-right" id="nav-list">
+						<li>
+							<a class="animate-a" href="/seminar/">Events</a>
+						</li>
+						<li>
+							<a class="animate-a" href="#whowehelp">Who We Help</a>
+						</li>
+						<li>
+							<a class="animate-a" href="#whatwedo">What We Do</a>
+						</li>
+						<li>
+							<a class="animate-a" href="#ceo">Our Team</a>
+						</li>
+						<li class="dropdown">
+							<a aria-expanded="false" aria-haspopup="true" class="animate-a dropdown-toggle" data-toggle="dropdown" href="#" role="button">Get Financing</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="animate-a" href="dep.html">Dealers</a>
+								</li>
+								<li>
+									<a class="animate-a" href="#ourprograms">Manufacturers</a>
+								</li>
+								<li>
+									<a class="animate-a" href="http://itf-finance.com#letsgetdown">Investors</a>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown growing-but">
+							<a aria-expanded="true" aria-haspopup="true" class="animate-a dropdown-toggle" data-toggle="dropdown" href="#" role="button">Get Growing</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="animate-a" href="gfp.html">GFP</a>
+								</li>
+								<li>
+									<a class="animate-a" href="dep.html">DEP</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a class="animate-a" href="#contactus">Contacts</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<section id="slider">
+		<div class="carousel fade-carousel slide" data-interval="5000" data-ride="carousel" id="bs-carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li class="active" data-slide-to="0" data-target="#bs-carousel"></li>
+				<li data-slide-to="1" data-target="#bs-carousel"></li>
+				<li data-slide-to="2" data-target="#bs-carousel"></li>
+			</ol><!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item slides active">
+					<div class="slide-2"></div>
+					<div class="hero">
+						<hgroup>
+							<h2 class="animated1 fadeInLeft">Offer Your International Customers</h2>
+							<h1 class="animated2 fadeInLeft">FAST & LOW-RATE FINANCING</h1>
+							<p class="animated3 fadeInLeft">220+ Financial Institutions Worldwide and 20 Years of Retail/ Export Finance Know-How</p><a class="sim-button button1" href="gfp.html#globalprogram">Get Growing</a>
+						</hgroup>
+					</div>
+				</div>
+				<div class="item slides">
+					<div class="slide-4"></div>
+					<div class="hero">
+						<hgroup>
+							<a class="sim-button button1" href="http://members.dsmpartnership.com/events/details/international-finance-for-sales-practical-seminar-09-19-2018-57054" target="_blank">
+								Register
+							</a>
+						</hgroup>
+					</div>
+				</div>
+				<div class="item slides">
+					<div class="slide-3"></div>
+					<div class="hero">
+						<hgroup>
+							<h2 class="animated1 fadeInLeft">Make Your Investment Project Ambitions a Reality with</h2>
+							<h1 class="animated2 fadeInLeft">TURN-KEY PROJECT FINANCE</h1>
+							<p class="animated3 fadeInLeft">$1.7 billion of projects under management globally in all industries.</p>
+							<div class="sim-button button1" data-target="#modal" data-toggle="modal">
+								Get Solution
+							</div>
+						</hgroup>
+					</div>
+				</div> 
+				<div class="item slides">
+					<div class="slide-1"></div>
+					<div class="hero">
+						<hgroup>
+							<h2 class="animated1 fadeInLeft">Expand Suppliers, Credit Lines & Financing for Customers with</h2>
+							<h1 class="animated2 fadeInLeft">DEALER SOLUTIONS</h1>
+							<p class="animated3 fadeInLeft">Access to 2,500 manufacturers worldwide seeking to expand to new markets.</p>
+							<div class="sim-button button1" data-target="#modal" data-toggle="modal">
+								Get Financing
+							</div>
+						</hgroup>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="whowehelp">
+		<div class="container">
+			<div class="row">
+				<h3 class="whowehelp-h3">Who We Help</h3>
+				<p class="whowehelp-parag">Financing is the key to business growth. Let us help you find your solution</p>
+			</div>
+			<div class="row">
+				<div class="help-item col-md-4 col-sm-4">
+					<img alt="Manufacturers and Exporters" class="help-item-img" src="img/worldwide-2.png">
+					<h5>Manufacturers & Exporters</h5>
+					<p>Make financing part of your global sales and marketing strategy.</p>
+				</div>
+				<div class="help-item col-md-4 col-sm-4">
+					<img alt="Dealers, Importers and Buyers" class="help-item-img" src="img/dollar-symbol-2.png">
+					<h5>Dealers, Importers & Buyers</h5>
+					<p>Get financing on the most competitive terms for your industrial purchases.</p>
+				</div>
+				<div class="help-item col-md-4 col-sm-4">
+					<img alt="Investors and Project Developers" class="help-item-img" src="img/light-bulb-2.png">
+					<h5>Investors & Project Developers</h5>
+					<p>Leverage your investment to obtain the best in debt and mezzanine finance.</p>
+				</div>
+			</div><a class="sim-button button2" href="#contactus">Contact Us</a>
+		</div>
+	</section>
+	<section id="whatwedo">
+		<div class="container">
+			<div class="row">
+				<h3 class="whatwedo-h3">What We Do</h3>
+				<p class="whatwedo-parag">Financial programs and transaction support worldwide</p>
+			</div>
+			<div class="row">
+				<div class="what-item col-md-4 col-sm-6">
+					<img alt="Retail Finance" class="what-item-img" src="img/shopping-bag-2.png" width="100px">
+					<h5 class="what-item-h5">Retail Finance</h5>
+					<p>We create turn-key subsidized financing programs for manufacturers/exporters with foreign banks & leasing companies. We have over 220 financial institutions we work with worldwide.</p>
+				</div>
+				<div class="what-item col-md-4 col-sm-6">
+					<img alt="Project Finance" class="what-item-img" src="img/clock-3.png" width="100px">
+					<h5 class="what-item-h5">Project Finance</h5>
+					<p>Our diversified team supports project developers to leverage their investment to attract co-investment and long-term debt finance on the best terms. Our portfolio of projects currently is at $1.7 billion USD.</p>
+				</div>
+				<div class="what-item col-md-4 col-sm-6">
+					<img alt="Dealer Support" class="what-item-img" src="img/connected-2.png" width="100px">
+					<h5 class="what-item-h5">Dealer Support</h5>
+					<p>We support dealers to find new suppliers, obtain credit lines, use export finance, and create retail finance solutions. We have over 2,500 manufacturer contacts worldwide for nearly all solutions.</p>
+				</div>
+				<div class="what-item col-md-4 col-sm-6">
+					<img alt="Raise Equity" class="what-item-img" src="img/bar-chart-2.png" width="100px">
+					<h5 class="what-item-h5">Raise Equity</h5>
+					<p>Through our network of investor clients and financial institutions worldwide, we have what it takes to find venture capital, mezzanine, institutional, and strategic investors for your project.</p>
+				</div>
+				<div class="what-item col-md-4 col-sm-6">
+					<img alt="Equipment Tenders" class="what-item-img" src="img/briefcase-2.png" width="100px">
+					<h5 class="what-item-h5">Equipment Tenders</h5>
+					<p>We level the playing field when it comes to financial offers from equipment suppliers and banks. Our deep knowledge of retail & export finance compels manufacturers, banks and dealers to offer the best financing terms for your CAPEX purchase or project.</p>
+				</div>
+				<div class="what-item col-md-4 col-sm-6">
+					<img alt="Find Dealers" class="what-item-img" src="img/networking-2.png" width="100px">
+					<h5 class="what-item-h5">Find Dealers</h5>
+					<p>Through our network of agents in 36 countries, banks, leasing companies and dealers around the world, we can be the foundation for helping your business expand its distribution footprint worldwide.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="ceo">
+		<div class="container">
+			<div class="row">
+				<div class="block1">
+					<h5>ITF is a US-based, global finance and market development company, and was founded in 2008 by Jeffrey B. Kamins.</h5>
+					<div class="block2">
+						<span>integrated trade finance</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ceo-text col-md-6">
+					<a class="linkedin" href="https://www.linkedin.com/in/jeffreykamins/" target="_blank">JEFFREY B. KAMINS</a><br>
+					<span>Founder & CEO</span>
+					<div class="line"></div>
+					<p>Jeffrey B. Kamins is the founder and CEO of Integrated Trade Finance LLC (ITF). He earned his MBA at the Thunderbird School of Global Management in 2000 specialized in international finance and Russian. He speaks English, Russian, German and Spanish.</p>
+					<p>His background includes over 20 years of working with the CIS countries, as well as other international markets, mainly in the area of agriculture, infrastructure, as well as renewable and nuclear energy. Mr. Kamins has held senior international management positions at three corporations including AGCO Corporation (NYSE: AGCO) Valmont Industries, Inc. (NYSE: VMI), and RWE NUKEM GmbH formerly part of RWE AG. Mr. Kamins has also served in the United States Department of Commerce working extensively with CIS countries.</p>
+				</div>
+				<div class="ceo-img col-md-6"></div>
+			</div>
+		</div>
+	</section>
+	<section id="ourmission">
+		<div class="container">
+			<div class="row">
+				<div class="ourmission">
+					<div class="quote col-md-1 col-sm-1 col-xs-1">
+						<span>&#8220</span>
+					</div>
+					<div class="quote-text col-md-11 col-sm-11 col-xs-11">
+						<p>- OUR MISSION -</p>
+						<p>TO TRANSCEND INTERNATIONAL BOUNDARIES BRINGING PEOPLE, IDEAS, EQUIPMENT AND MONEY TOGETHER.</p>
+						<p>Jeffrey B. Kamins, Founder & CEO of ITF</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="globalteam">
+		<div class="container">
+			<div class="row">
+				<h3 class="globalteam-h3">Our Global Team</h3>
+				<p class="globalteam-p">We are diversity, experience and reach, all enabling our customers to seize truly global opportunities.</p>
+			</div>
+			<div class="row">
+				<div class="team-item col-md-3 col-sm-6">
+					<div class="team-img4"></div>
+					<p class="person-name">Joe Chapuran</p>
+					<p class="person-position">Vice President</p>
+					<p class="person-location">INTERNATIONAL</p>
+					<p class="person-nationality">Omaha, Nebraska</p>
+				</div>
+				<div class="team-item col-md-3 col-sm-6">
+					<div class="team-img1"></div>
+					<p class="person-name">Robert Elic</p>
+					<p class="person-position">Director</p>
+					<p class="person-location">Americas</p>
+					<p class="person-nationality">Omaha, Nebraska, USA</p>
+				</div>
+				<div class="team-item col-md-3 col-sm-6">
+					<div class="team-img7"></div>
+					<p class="person-name">Bakhtiyar Mammadov</p>
+					<p class="person-position">Director</p>
+					<p class="person-location">EUROPE</p>
+					<p class="person-nationality">Luxembourg City, Luxembourg</p>
+				</div>
+				<div class="team-item col-md-3 col-sm-6">
+					<div class="team-img8"></div>
+					<p class="person-name">Muyiwa Omololu</p>
+					<p class="person-position">Director</p>
+					<p class="person-location">WEST AFRICA</p>
+					<p class="person-nationality">Lagos, Nigeria</p>
+				</div>
+				<div class="team-item col-md-3 col-sm-6">
+					<div class="team-img2"></div>
+					<p class="person-name">Monte Mochochoko</p>
+					<p class="person-position">Director</p>
+					<p class="person-location">South and East Africa</p>
+					<p class="person-nationality">Johannesburg, South Africa</p>
+				</div>
+				<div class="team-item col-md-3 col-sm-6">
+					<div class="team-img5"></div>
+					<p class="person-name">Oleksandr Yosypenko</p>
+					<p class="person-position">Director</p>
+					<p class="person-location">Global Finance & Operations</p>
+					<p class="person-nationality">Kyiv, Ukraine</p>
+				</div>
+				<div class="team-item col-md-3 col-sm-6">
+					<div class="team-img6"></div>
+					<p class="person-name">Klaus Holzinger</p>
+					<p class="person-position">Director</p>
+					<p class="person-location">AGRICULTURE INFRASTRUCTURE PROJECTS</p>
+					<p class="person-nationality">Vienna, Austria</p>
+				</div>
+				<div class="team-item col-md-3 col-sm-6">
+					<div class="team-img3"></div>
+					<p class="person-name">Michael Hyder</p>
+					<p class="person-position">Director</p>
+					<p class="person-location">MIDDLE EAST</p>
+					<p class="person-nationality">Riyadh, Saudi Arabia</p>
+				</div>
+							</div>
+			<div class="row">
+				<div class="team-item col-md-offset-3 col-md-3 col-sm-6 klen-block">
+					<div class="team-img9"></div><img alt="JK logo" class="klen-img" src="img/jk_logo.png">
+					<p class="person-name">Jelena Klen</p>
+					<p class="person-position">Marketing Services Partner</p>
+					<p class="person-location">JK Global Marketing LLC</p>
+					<p class="person-nationality">Kyiv, Ukraine</p>
+				</div>
+				<div class="team-item col-md-3 col-sm-6 ostapenko-block">
+					<div class="team-img10"></div><img alt="EY logo" class="ostapenko-img" src="img/Wehavehelped/6.png">
+					<p class="person-name">VLADYSLAV OSTAPENKO</p>
+					<p class="person-position">Financial Services Partner</p>
+					<p class="person-location">ERNST & YOUNG</p>
+					<p class="person-nationality">Kyiv, Ukraine</p>
+				</div>
+			</div><a class="sim-button button3" href="https://www.linkedin.com/company-beta/1443263/" target="_blank">Connect With Us</a>
+		</div>
+	</section>
+	<section id="parallax">
+		<p>Integrated Trade Finance (ITF) - One World. One Team. Diverse Clients - Effective Solutions!</p>
+	</section>
+	<section class="hidden-xs" id="ourexperience">
+		<div class="container">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="row">
+					<h3 class="ourexp-h3">Our Experience & Network</h3>
+					<p class="ourexp-p">Some of the companies we have helped</p>
+				</div>
+				<div class="row">
+					<ul id="carousel-brands">
+						<li class="brand-item">
+							<a class="brand1" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand2" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand3" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand4" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand5" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand6" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand7" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand8" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand9" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand10" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand11" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand12" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand13" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand14" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand15" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand16" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand17" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand18" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand19" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand20" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand21" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand22" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand23" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand24" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand25" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand26" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand27" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand28" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand29" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand30" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand31" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand32" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand33" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand34" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand35" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand36" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand37" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand38" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand39" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="brand40" href="#"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="visible-xs" id="ourexperience-mobile">
+		<div class="container">
+			<div class="col-xs-12">
+				<div class="row">
+					<h3 class="ourexp-h3">Our Experience & Network</h3>
+					<p class="ourexp-p">Some of the companies we have helped</p>
+				</div>
+				<div class="row">
+					<div class="card">
+						<div class="card-content brand1"></div>
+						<div class="card-content brand2"></div>
+						<div class="card-content brand3"></div>
+						<div class="card-content brand4"></div>
+						<div class="card-content brand5"></div>
+						<div class="card-content brand6"></div>
+						<div class="card-content brand7"></div>
+						<div class="card-content brand8"></div>
+						<div class="card-content brand9"></div>
+						<div class="card-content brand10"></div>
+						<div class="card-content brand11"></div>
+						<div class="card-content brand12"></div>
+						<div class="card-content brand13"></div>
+						<div class="card-content brand14"></div>
+						<div class="card-content brand15"></div>
+						<div class="card-content brand16"></div>
+						<div class="card-content brand17"></div>
+						<div class="card-content brand18"></div>
+						<div class="card-content brand19"></div>
+						<div class="card-content brand20"></div>
+						<div class="card-content brand21"></div>
+						<div class="card-content brand22"></div>
+						<div class="card-content brand23"></div>
+						<div class="card-content brand24"></div>
+						<div class="card-content brand25"></div>
+						<div class="card-content brand26"></div>
+						<div class="card-content brand27"></div>
+						<div class="card-content brand28"></div>
+						<div class="card-content brand29"></div>
+						<div class="card-content brand30"></div>
+						<div class="card-content brand31"></div>
+						<div class="card-content brand32"></div>
+						<div class="card-content brand33"></div>
+						<div class="card-content brand34"></div>
+						<div class="card-content brand35"></div>
+						<div class="card-content brand36"></div>
+						<div class="card-content brand37"></div>
+						<div class="card-content brand38"></div>
+						<div class="card-content brand39"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="container">
+		<div class="line-div"></div>
+	</div>
+	<section class="hidden-xs" id="ourexperiencework">
+		<div class="container">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="row">
+					<h3 class="ourexpwork-h3">Our Experience & Network</h3>
+					<p class="ourexpwork-p">Some of the 220+ Financial Institutions with whom we work</p>
+				</div>
+				<div class="row">
+					<ul id="carousel-work-brands">
+						<li class="brand-item">
+							<a class="work-brand1" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand2" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand3" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand4" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand5" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand6" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand7" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand8" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand9" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand10" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand11" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand12" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand13" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand14" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand15" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand16" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand17" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand18" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand19" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand20" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand21" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand22" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand23" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand24" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand25" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand26" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand27" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand28" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand29" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand30" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand31" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand32" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand33" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand34" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand35" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand36" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand37" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand38" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand39" href="#"></a>
+						</li>
+						<li class="brand-item">
+							<a class="work-brand40" href="#"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="visible-xs" id="ourexperiencework-mobile">
+		<div class="container">
+			<div class="col-xs-12">
+				<div class="row">
+					<h3 class="ourexpwork-h3">Our Experience & Network</h3>
+					<p class="ourexpwork-p">Some of the 220+ Financial Institutions with whom we work</p>
+				</div>
+				<div class="row">
+					<div class="card">
+						<div class="card-content work-brand1"></div>
+						<div class="card-content work-brand2"></div>
+						<div class="card-content work-brand3"></div>
+						<div class="card-content work-brand4"></div>
+						<div class="card-content work-brand5"></div>
+						<div class="card-content work-brand6"></div>
+						<div class="card-content work-brand7"></div>
+						<div class="card-content work-brand8"></div>
+						<div class="card-content work-brand9"></div>
+						<div class="card-content work-brand10"></div>
+						<div class="card-content work-brand11"></div>
+						<div class="card-content work-brand12"></div>
+						<div class="card-content work-brand13"></div>
+						<div class="card-content work-brand14"></div>
+						<div class="card-content work-brand15"></div>
+						<div class="card-content work-brand16"></div>
+						<div class="card-content work-brand17"></div>
+						<div class="card-content work-brand18"></div>
+						<div class="card-content work-brand19"></div>
+						<div class="card-content work-brand20"></div>
+						<div class="card-content work-brand21"></div>
+						<div class="card-content work-brand22"></div>
+						<div class="card-content work-brand23"></div>
+						<div class="card-content work-brand24"></div>
+						<div class="card-content work-brand25"></div>
+						<div class="card-content work-brand26"></div>
+						<div class="card-content work-brand27"></div>
+						<div class="card-content work-brand28"></div>
+						<div class="card-content work-brand29"></div>
+						<div class="card-content work-brand30"></div>
+						<div class="card-content work-brand31"></div>
+						<div class="card-content work-brand32"></div>
+						<div class="card-content work-brand33"></div>
+						<div class="card-content work-brand34"></div>
+						<div class="card-content work-brand35"></div>
+						<div class="card-content work-brand36"></div>
+						<div class="card-content work-brand37"></div>
+						<div class="card-content work-brand38"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="testimonials">
+		<div class="container">
+			<div class="testimonials-p">
+				<p>Testimonials from our clients</p>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12 left">
+					<div class="review">
+						<div class="img-review-box"><img alt="Wehavehelped" src="img/Wehavehelped/4.png"></div>
+						<h3>Stephen Pickup, CEO</h3>
+						<p>“ITF helped our company to develop a process that can be used again in the future to compare multiple forms of financing, supplier retail finance options, and offers from financial institutions. This methodology is valuable to our shareholders and management because it ensures competitiveness and transparency in our CAPEX procurement.”</p>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12 right">
+					<div class="review">
+						<div class="img-review-box"><img alt="Wehavehelped" src="img/Wehavehelped/7.png"></div>
+						<h3>André Granger, President</h3>
+						<p>“ITF helped us to take a more proactive approach to financing the end-customer, knowing it is an essential part of securing international sales.”</p>
+					</div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12 up-effect">
+					<div class="review">
+						<div class="img-review-box"><img alt="Wehavehelped" class="kbpp-img" src="img/kbpp.png"></div>
+						<h3>Daragh Duffy<br>
+						Owner and Project Development Director<br>
+						Khmelnitskiy Bio Power Plant (KBPP), a $150 M straw-biomass power plant in Ukraine</h3>
+						<p>”We would gladly recommend ITF to any investors or project developers considering to launch complex, large international projects requiring financing and equipment supplier selection. Their services are unmatched.”</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="ourprograms">
+		<div class="container">
+			<div class="row">
+				<h3 class="ourprograms-h3">Our Programs</h3>
+				<p class="ourprograms-parag">Two dynamic solutions to grow international sales</p>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-md-5 programs-logo-gfp">
+					<img alt="GFP logo" src="img/gfp/GFPlogo.png"><a class="sim-button button1" href="gfp.html">Learn More</a>
+				</div>
+				<div class="col-sm-6 col-md-offset-2 col-md-5 programs-logo-dep">
+					<img alt="DEP logo" src="img/dep/deplogo.png"><a class="sim-button button2" href="dep.html">Learn More</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="parallax1"></section>
+	<section id="letsgetdown">
+		<div class="container">
+			<div class="row">
+				<h3 class="letsgetdown-h3">Let's Get Down to Business!</h3>
+				<p class="letsgetdown-parag">While others are only thinking, let us help you put a plan in motion. Get your customized solution today.</p>
+			</div>
+			<form action="" id="form-1" method="post" name="form-1">
+				<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="input-group form1-group">
+						<label>E-mail*</label><input class="form-control e-mail" name="e-mail" placeholder="example@mail.com" type="text">
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="input-group form1-group">
+						<label>Phone</label><input class="form-control tell" name="tell" placeholder="+1 (123) 456 78 90" type="text">
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="input-group form1-group">
+						<input class="sim-button button5 feedback" name="send" type="button" value="Send Request Now!">
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+	<section id="contactus">
+		<div class="overlay">
+			<div class="container">
+				<div class="contact-block">
+					<h3>Contact Us</h3>
+					<p>Skype: itf.finance</p>
+					<p>Worldwide Tel: +1 (202) 6979 514</p>
+					<p>E-mail: info@itf-finance.com</p>
+					<p>Headquarters: 4611 S. 96th St., Suite 300</p>
+					<p>Omaha, NE 68127 USA</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer>
+		<div class="container-fluid">
+			<div class="copyright">
+				<p>Copyright © 2008 - 2018 Integrated Trade Finance, LLC. All Rights Reserved.</p>
+			</div>
+		</div>
+	</footer>
+	<div class="socials">
+		<ul class="social-nav">
+			<li>
+				<a class="facebook" href="https://www.facebook.com/Integrated-Trade-Finance-LLC-877991968973912/" rel="nofollow" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a>
+			</li>
+			<li>
+				<a class="linkedin" href="https://www.linkedin.com/company-beta/1443263/" rel="nofollow" target="_blank" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+			</li>
+		</ul>
+	</div>
+	<div class="to-up">
+		<a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+	</div>
+	<div class="modal fade" id="modal" tabindex="-1">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header"><button class="close" data-dismiss="modal">x</button><img alt="Logo" class="modal-logo" src="img/ITFlogoweb.png"></div>
+				<div class="modal-body">
+					<form action="" id="form-2" method="post" name="form-2">
+						<div class="input-group pop-up">
+							<label>E-mail*</label><input class="form-control e-mail" name="e-mail" placeholder="example@mail.com" type="text"><br>
+							<label>Message</label>
+							<textarea class="form-control text" name="text"></textarea><input class="sim-button button5 feedback" type="button" value="Submit">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script rel="stylesheet" src="js/bootstrap.min.js"></script>
+	<script rel="stylesheet" src="js/jquery.boxloader.min.js"></script>
+	<script rel="stylesheet" src="js/jquery.jgrowl.js"></script>
+	<script rel="stylesheet" src="js/jquery.arcticmodal.js"></script>
+	<script rel="stylesheet" src="js/feedback.js"></script>
+	<script rel="stylesheet" src="js/js.js"></script>
+</body>
+</html>
